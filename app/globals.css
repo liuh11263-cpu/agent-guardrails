@@ -94,8 +94,14 @@ a {
   align-items: center !important;
 }
 
-/* 隐藏 GTranslate 默认的漂浮悬浮球 (如果发生的话) */
-.gtranslate_wrapper {
+/* 强力屏蔽 GTranslate 默认在页面左下角生成的任何悬浮框/悬浮球 */
+#gt_float_wrapper, 
+.gt_float_wrapper, 
+.gtranslate_wrapper,
+div[id*="gt_float"] {
   display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
