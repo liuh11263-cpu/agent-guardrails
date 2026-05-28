@@ -9,12 +9,12 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { getBookmarkHelpText } from "@/lib/bookmark";
 
 const navItems = [
-  { href: "/", label: "首页" },
-  { href: "/docs", label: "使用指南" },
-  { href: "/debug", label: "Debug库" },
-  { href: "/prompts", label: "Prompt库" },
-  { href: "/skills", label: "Skill库" },
-  { href: "/categories", label: "分类" }
+  { href: "/", label: "首页 / Home" },
+  { href: "/docs", label: "使用指南 / Docs" },
+  { href: "/debug", label: "Debug 库" },
+  { href: "/prompts", label: "Prompt 库" },
+  { href: "/skills", label: "Skill 库" },
+  { href: "/categories", label: "分类 / Categories" }
 ];
 
 export function Header() {
@@ -41,10 +41,10 @@ export function Header() {
           </span>
           <span className="min-w-0">
             <span className="block truncate text-base font-semibold leading-5 text-[var(--nav-text)]">
-              AI工程 Debug 手册
+              Agent Guardrails / Debug 手册
             </span>
             <span className="hidden text-xs text-[var(--nav-muted)] sm:block">
-              Prompt / Skill 实战库
+              Prompt / Skill Archive
             </span>
           </span>
         </Link>

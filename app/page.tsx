@@ -47,13 +47,14 @@ export default function HomePage() {
       <section className="border-b border-[var(--border-soft)] bg-[var(--surface-raised)]">
         <div className="mx-auto flex min-h-[520px] max-w-5xl flex-col items-center justify-center px-5 py-16 text-center sm:px-8">
           <p className="mb-4 text-sm font-semibold text-[var(--accent)]">
-            AI工程解决方案库：Prompt / Debug / Skill
+            AI 工程解决方案库 / Common Error Immunity for LLM Agents
           </p>
           <h1 className="max-w-4xl text-4xl font-semibold leading-tight tracking-normal text-[var(--text-main)] sm:text-5xl lg:text-6xl">
-            找一个可执行解决方案
+            找一个可执行解决方案 <br />
+            <span className="text-xl font-normal text-[var(--text-muted)] sm:text-2xl lg:text-3xl">Finding Executable Solutions for Agents</span>
           </h1>
           <p className="mt-6 max-w-3xl text-base leading-8 text-[var(--text-muted)] sm:text-lg">
-            用户不是来阅读文章的，而是来快速定位一个可以复制、执行、验证的工程方案。
+            大模型 Agent 时代，开发者不需要阅读长篇大论，而是需要一个可以直接复制、执行并闭环验证的工程方案。
             Prompt 是一句指令，Debug 是一个问题解法，Skill 是一套可复用工作流。
           </p>
           <div className="mt-8 w-full max-w-4xl">
