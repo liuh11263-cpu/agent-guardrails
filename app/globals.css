@@ -66,3 +66,36 @@ body {
 a {
   text-decoration: none;
 }
+
+/* ==========================================
+   GTranslate Dropdown Custom Skin
+   ========================================== */
+#gtranslate_wrapper select {
+  background: var(--app-bg-soft) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border-soft) !important;
+  border-radius: 8px !important;
+  padding: 4px 10px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  outline: none !important;
+  cursor: pointer !important;
+  height: 38px !important;
+  transition: all 0.2s ease !important;
+}
+
+#gtranslate_wrapper select:hover {
+  background: var(--app-bg) !important;
+  border-color: var(--border-strong) !important;
+}
+
+#gtranslate_wrapper {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* 隐藏 GTranslate 默认的漂浮悬浮球 (如果发生的话) */
+.gtranslate_wrapper {
+  display: none !important;
+}
+

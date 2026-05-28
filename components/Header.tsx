@@ -3,7 +3,7 @@
 import { Github, Star, TerminalSquare } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { getBookmarkHelpText } from "@/lib/bookmark";
@@ -20,6 +20,30 @@ const navItems = [
 export function Header() {
   const pathname = usePathname();
   const [bookmarkMessage, setBookmarkMessage] = useState("");
+
+  useEffect(() => {
+    (window as any).gtranslateSettings = {
+      default_language: "zh-CN",
+      languages: ["zh-CN", "en"],
+      wrapper_selector: "#gtranslate_wrapper",
+      flag_size: 16,
+      horizontal_position: "inline",
+      inline_layout: "text_flags",
+      alt_flags: { en: "usa" }
+    };
+
+    const script = document.createElement("script");
+    script.src = "https://cdn.gtranslate.net/widgets/latest/float.js";
+    script.defer = true;
+    document.body.appendChild(script);
+
+    return () => {
+      const existingScript = document.querySelector('script[src*="gtranslate"]');
+      if (existingScript) {
+        existingScript.remove();
+      }
+    };
+  }, []);
 
   function isActive(href: string) {
     if (href === "/") return pathname === "/";
@@ -65,6 +89,7 @@ export function Header() {
         </nav>
         <div className="hidden min-w-[260px] flex-1 items-center justify-end gap-3 lg:flex">
           <ThemeToggle />
+          <div id="gtranslate_wrapper" className="flex items-center min-h-[38px]"></div>
           <div className="relative">
             <button
               type="button"
@@ -87,8 +112,10 @@ export function Header() {
             </span>
           </div>
           <a
-            href="https://github.com"
+            href="https://github.com/liuh11263-cpu/agent-guardrails"
             className="inline-flex items-center gap-1.5 rounded-md px-2 py-2 text-sm font-semibold text-[var(--nav-text)] hover:bg-[var(--app-bg-soft)]"
+            target="_blank"
+            rel="noreferrer"
           >
             <Github size={16} />
             GitHub
