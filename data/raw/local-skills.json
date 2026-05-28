@@ -1,0 +1,77 @@
+[
+  {
+    "id": "skill_800d4818",
+    "title": "Cursor 测试生成工作流",
+    "slug": "cursor",
+    "category": "Skill",
+    "domain": "AI 编程",
+    "summary": "代码已有主要逻辑，但缺少单元测试或回归测试。",
+    "use_case": "代码已有主要逻辑，但缺少单元测试或回归测试。",
+    "trigger_keywords": [
+      "AI 编程",
+      "Skill",
+      "ChatGPT",
+      "Claude Code",
+      "Codex",
+      "Cursor",
+      "测试生成工作流"
+    ],
+    "inputs": [
+      "目标文件路径",
+      "现有测试框架",
+      "需要覆盖的行为"
+    ],
+    "steps": [
+      "阅读现有测试风格。",
+      "列出需要覆盖的正常路径、边界路径和错误路径。",
+      "先写一个最小失败测试。",
+      "运行测试确认失败原因正确。",
+      "补实现或调整测试夹具。",
+      "运行完整相关测试。"
+    ],
+    "output_format": [
+      "测试用例清单",
+      "新增测试代码",
+      "运行命令",
+      "覆盖风险"
+    ],
+    "constraints": [
+      "不要为了测试修改业务行为。",
+      "不要引入新测试框架。",
+      "不要编造不存在的信息。",
+      "信息不足时先列出缺失项。",
+      "不要大范围重构，优先给最小可行方案。",
+      "涉及代码时必须给验证命令或检查方式。",
+      "涉及来源时必须保留 source_url。"
+    ],
+    "verification": [
+      "新测试先失败后通过。",
+      "相关测试命令退出码为 0。"
+    ],
+    "example_prompt": "",
+    "copy_content": "你是一个【AI 编程】方向的 AI 工作流执行助手。\n\n任务：\n【代码已有主要逻辑，但缺少单元测试或回归测试。】\n\n适用场景：\n【代码已有主要逻辑，但缺少单元测试或回归测试。】\n\n我的输入：\n【请在这里粘贴你的具体问题、报错、代码、截图描述、链接或目标】\n\n请按以下流程执行：\n1. 阅读现有测试风格。\n2. 列出需要覆盖的正常路径、边界路径和错误路径。\n3. 先写一个最小失败测试。\n4. 运行测试确认失败原因正确。\n5. 补实现或调整测试夹具。\n6. 运行完整相关测试。\n\n输出时请包含：\n- 测试用例清单\n- 新增测试代码\n- 运行命令\n- 覆盖风险\n\n约束：\n- 不要为了测试修改业务行为。\n- 不要引入新测试框架。\n- 不要编造不存在的信息。\n- 信息不足时先列出缺失项。\n- 不要大范围重构，优先给最小可行方案。\n- 涉及代码时必须给验证命令或检查方式。\n- 涉及来源时必须保留 source_url。\n\n验证：\n- 新测试先失败后通过。\n- 相关测试命令退出码为 0。",
+    "tags": [
+      "AI 编程",
+      "Skill",
+      "ChatGPT",
+      "Claude Code",
+      "Codex",
+      "Cursor"
+    ],
+    "difficulty": "intermediate",
+    "tooling": [
+      "ChatGPT",
+      "Claude Code",
+      "Codex"
+    ],
+    "source_name": "example-local-skills.md",
+    "source_url": "local:data/imports/example-local-skills.md",
+    "source_type": "local",
+    "quality_score": 5,
+    "quality_reason": "结构完整，包含场景、输入、步骤、输出、约束、验证和来源，可直接入库。",
+    "approved": false,
+    "recommended": true,
+    "created_at": "2026-05-27",
+    "updated_at": "2026-05-27"
+  }
+]

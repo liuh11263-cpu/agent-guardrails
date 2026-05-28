@@ -1,0 +1,666 @@
+[
+  {
+    "id": "skill_f99fb99f",
+    "title": "API 调用失败 Debug 工作流",
+    "slug": "api-call-failure-debug-workflow",
+    "category": "Debug",
+    "domain": "Debug",
+    "summary": "按请求、鉴权、参数、服务端日志和模型响应逐层排查 API 调用失败。",
+    "use_case": "接口返回 400、401、403、422、429、500，或大模型 API 调用没有进入业务逻辑时使用。",
+    "trigger_keywords": [
+      "API",
+      "401",
+      "403",
+      "422",
+      "429",
+      "500",
+      "Debug"
+    ],
+    "inputs": [
+      "请求代码",
+      "请求体",
+      "响应状态码",
+      "服务端日志",
+      "环境变量配置"
+    ],
+    "steps": [
+      "确认失败状态码和响应体。",
+      "检查请求 URL、method、header、Content-Type。",
+      "核对鉴权 key、项目、权限和额度。",
+      "对照 schema 检查字段名、类型和必填项。",
+      "查看服务端日志或模型服务响应。",
+      "构造最小 curl 请求复现并验证修复。"
+    ],
+    "output_format": [
+      "最可能层级",
+      "证据",
+      "修复建议",
+      "最小验证命令"
+    ],
+    "constraints": [
+      "不要只凭状态码下结论。",
+      "不要暴露明文 API key。",
+      "先做最小复现再改业务代码。",
+      "不要编造不存在的信息。",
+      "信息不足时先列出缺失项。",
+      "不要大范围重构，优先给最小可行方案。",
+      "涉及代码时必须给验证命令或检查方式。",
+      "涉及来源时必须保留 source_url。"
+    ],
+    "verification": [
+      "curl 或测试脚本返回预期状态。",
+      "日志中不再出现同类错误。"
+    ],
+    "example_prompt": "",
+    "copy_content": "你是一个【Debug】方向的 AI 工作流执行助手。\n\n任务：\n【按请求、鉴权、参数、服务端日志和模型响应逐层排查 API 调用失败。】\n\n适用场景：\n【接口返回 400、401、403、422、429、500，或大模型 API 调用没有进入业务逻辑时使用。】\n\n我的输入：\n【请在这里粘贴你的具体问题、报错、代码、截图描述、链接或目标】\n\n请按以下流程执行：\n1. 确认失败状态码和响应体。\n2. 检查请求 URL、method、header、Content-Type。\n3. 核对鉴权 key、项目、权限和额度。\n4. 对照 schema 检查字段名、类型和必填项。\n5. 查看服务端日志或模型服务响应。\n6. 构造最小 curl 请求复现并验证修复。\n\n输出时请包含：\n- 最可能层级\n- 证据\n- 修复建议\n- 最小验证命令\n\n约束：\n- 不要只凭状态码下结论。\n- 不要暴露明文 API key。\n- 先做最小复现再改业务代码。\n- 不要编造不存在的信息。\n- 信息不足时先列出缺失项。\n- 不要大范围重构，优先给最小可行方案。\n- 涉及代码时必须给验证命令或检查方式。\n- 涉及来源时必须保留 source_url。\n\n验证：\n- curl 或测试脚本返回预期状态。\n- 日志中不再出现同类错误。",
+    "tags": [
+      "API",
+      "Debug",
+      "LLM API"
+    ],
+    "difficulty": "beginner",
+    "tooling": [
+      "ChatGPT",
+      "Claude Code",
+      "Codex"
+    ],
+    "source_name": "站内手动整理",
+    "source_url": "manual:api-call-failure-debug-workflow",
+    "source_type": "manual",
+    "quality_score": 5,
+    "quality_reason": "结构完整，包含场景、输入、步骤、输出、约束、验证和来源，可直接入库。",
+    "approved": true,
+    "recommended": true,
+    "created_at": "2026-05-27",
+    "updated_at": "2026-05-27"
+  },
+  {
+    "id": "skill_1ab75da1",
+    "title": "Claude Code 功能开发闭环",
+    "slug": "claude-code-feature-loop",
+    "category": "Skill",
+    "domain": "Agent",
+    "summary": "把功能需求交给 Claude Code / Codex，按计划、测试、实现、验证闭环完成交付。",
+    "use_case": "当你要实现一个前端功能、后端接口、脚本工具或小型重构，希望 AI Agent 稳定完成并给出验证证据时使用。",
+    "trigger_keywords": [
+      "Claude Code",
+      "Codex",
+      "功能开发",
+      "TDD",
+      "验证"
+    ],
+    "inputs": [
+      "功能目标",
+      "相关文件路径",
+      "验收标准",
+      "当前报错或设计约束"
+    ],
+    "steps": [
+      "梳理目标、边界和验收标准。",
+      "定位相关代码和现有模式。",
+      "先补失败测试或最小验证脚本。",
+      "实现最小可行改动。",
+      "运行测试、构建和原始场景验证。",
+      "输出改动文件、验证结果和剩余风险。"
+    ],
+    "output_format": [
+      "任务拆解",
+      "改动摘要",
+      "验证命令",
+      "风险提醒"
+    ],
+    "constraints": [
+      "不覆盖用户已有改动。",
+      "不做无关重构。",
+      "涉及代码必须给验证命令。",
+      "不要编造不存在的信息。",
+      "信息不足时先列出缺失项。",
+      "不要大范围重构，优先给最小可行方案。",
+      "涉及来源时必须保留 source_url。"
+    ],
+    "verification": [
+      "相关测试通过。",
+      "构建通过。",
+      "原始需求路径已被验证。"
+    ],
+    "example_prompt": "请按计划-测试-实现-验证闭环完成这个功能。",
+    "copy_content": "你是一个【Agent】方向的 AI 工作流执行助手。\n\n任务：\n【把功能需求交给 Claude Code / Codex，按计划、测试、实现、验证闭环完成交付。】\n\n适用场景：\n【当你要实现一个前端功能、后端接口、脚本工具或小型重构，希望 AI Agent 稳定完成并给出验证证据时使用。】\n\n我的输入：\n【请在这里粘贴你的具体问题、报错、代码、截图描述、链接或目标】\n\n请按以下流程执行：\n1. 梳理目标、边界和验收标准。\n2. 定位相关代码和现有模式。\n3. 先补失败测试或最小验证脚本。\n4. 实现最小可行改动。\n5. 运行测试、构建和原始场景验证。\n6. 输出改动文件、验证结果和剩余风险。\n\n输出时请包含：\n- 任务拆解\n- 改动摘要\n- 验证命令\n- 风险提醒\n\n约束：\n- 不覆盖用户已有改动。\n- 不做无关重构。\n- 涉及代码必须给验证命令。\n- 不要编造不存在的信息。\n- 信息不足时先列出缺失项。\n- 不要大范围重构，优先给最小可行方案。\n- 涉及来源时必须保留 source_url。\n\n验证：\n- 相关测试通过。\n- 构建通过。\n- 原始需求路径已被验证。",
+    "tags": [
+      "Claude Code",
+      "Codex",
+      "TDD",
+      "AI 编程"
+    ],
+    "difficulty": "intermediate",
+    "tooling": [
+      "Claude Code",
+      "Codex"
+    ],
+    "source_name": "站内手动整理",
+    "source_url": "manual:claude-code-feature-loop",
+    "source_type": "manual",
+    "quality_score": 5,
+    "quality_reason": "结构完整，包含场景、输入、步骤、输出、约束、验证和来源，可直接入库。",
+    "approved": true,
+    "recommended": true,
+    "created_at": "2026-05-27",
+    "updated_at": "2026-05-27"
+  },
+  {
+    "id": "skill_70bfaf0d",
+    "title": "GitHub 高星 Skill 采集入库工作流",
+    "slug": "github-skill-harvest-ingestion-workflow",
+    "category": "Skill",
+    "domain": "数据与检索",
+    "summary": "从 GitHub 高星 AI workflow / skills 仓库抓取、清洗、评分、去重并进入候选库。",
+    "use_case": "需要持续扩充 AI Developer Skill Archive，避免把低质量万能 Prompt 推到前台时使用。",
+    "trigger_keywords": [
+      "GitHub",
+      "Skill",
+      "采集",
+      "入库",
+      "资料抓取"
+    ],
+    "inputs": [
+      "搜索关键词",
+      "GitHub 仓库 README",
+      "skills/commands/workflows/agents 目录",
+      "质量规则"
+    ],
+    "steps": [
+      "按关键词低频搜索 GitHub 仓库。",
+      "读取 README 和结构化目录。",
+      "抽取触发场景、输入、步骤、输出、约束、验证。",
+      "按 Prompt / Debug / Skill 分类。",
+      "计算质量分并过滤低质量内容。",
+      "去重后写入候选库，等待人工审核。"
+    ],
+    "output_format": [
+      "skill-candidates.json",
+      "skills-approved.json",
+      "质量原因",
+      "来源链接"
+    ],
+    "constraints": [
+      "默认不自动上线新抓取内容。",
+      "同一 source_url 不重复入库。",
+      "网络失败时保留现有数据并继续本地流程。",
+      "不要编造不存在的信息。",
+      "信息不足时先列出缺失项。",
+      "不要大范围重构，优先给最小可行方案。",
+      "涉及来源时必须保留 source_url。"
+    ],
+    "verification": [
+      "重复运行不会制造大量重复数据。",
+      "quality_score >= 3 才进入候选库。",
+      "前端只读取 approved=true。"
+    ],
+    "example_prompt": "",
+    "copy_content": "你是一个【数据与检索】方向的 AI 工作流执行助手。\n\n任务：\n【从 GitHub 高星 AI workflow / skills 仓库抓取、清洗、评分、去重并进入候选库。】\n\n适用场景：\n【需要持续扩充 AI Developer Skill Archive，避免把低质量万能 Prompt 推到前台时使用。】\n\n我的输入：\n【请在这里粘贴你的具体问题、报错、代码、截图描述、链接或目标】\n\n请按以下流程执行：\n1. 按关键词低频搜索 GitHub 仓库。\n2. 读取 README 和结构化目录。\n3. 抽取触发场景、输入、步骤、输出、约束、验证。\n4. 按 Prompt / Debug / Skill 分类。\n5. 计算质量分并过滤低质量内容。\n6. 去重后写入候选库，等待人工审核。\n\n输出时请包含：\n- skill-candidates.json\n- skills-approved.json\n- 质量原因\n- 来源链接\n\n约束：\n- 默认不自动上线新抓取内容。\n- 同一 source_url 不重复入库。\n- 网络失败时保留现有数据并继续本地流程。\n- 不要编造不存在的信息。\n- 信息不足时先列出缺失项。\n- 不要大范围重构，优先给最小可行方案。\n- 涉及来源时必须保留 source_url。\n\n验证：\n- 重复运行不会制造大量重复数据。\n- quality_score >= 3 才进入候选库。\n- 前端只读取 approved=true。",
+    "tags": [
+      "GitHub",
+      "采集",
+      "资料抓取",
+      "Skill"
+    ],
+    "difficulty": "intermediate",
+    "tooling": [
+      "Node.js",
+      "GitHub API",
+      "ChatGPT",
+      "Codex"
+    ],
+    "source_name": "站内手动整理",
+    "source_url": "manual:github-skill-harvest-ingestion-workflow",
+    "source_type": "manual",
+    "quality_score": 5,
+    "quality_reason": "结构完整，包含场景、输入、步骤、输出、约束、验证和来源，可直接入库。",
+    "approved": true,
+    "recommended": true,
+    "created_at": "2026-05-27",
+    "updated_at": "2026-05-27"
+  },
+  {
+    "id": "skill_136239b1",
+    "title": "MCP 工具契约设计工作流",
+    "slug": "mcp-tool-contract-workflow",
+    "category": "Skill",
+    "domain": "Agent",
+    "summary": "为 Agent / MCP 工具设计稳定的输入输出契约、错误处理和验证样例。",
+    "use_case": "需要把本地能力、第三方 API 或业务操作暴露给 ChatGPT、Claude Code、Codex 或多 Agent 系统调用时使用。",
+    "trigger_keywords": [
+      "MCP",
+      "Tool Calling",
+      "Function Calling",
+      "Agent",
+      "工具契约"
+    ],
+    "inputs": [
+      "工具目标",
+      "输入参数",
+      "输出结构",
+      "错误场景",
+      "调用方约束"
+    ],
+    "steps": [
+      "定义工具唯一职责和不可做事项。",
+      "设计 JSON schema 或参数表。",
+      "列出成功输出和错误输出。",
+      "补充 3 个正向样例和 3 个负向样例。",
+      "写最小调用测试。",
+      "把契约写入工具说明或 MCP metadata。"
+    ],
+    "output_format": [
+      "工具说明",
+      "输入 schema",
+      "输出 schema",
+      "错误码",
+      "测试样例"
+    ],
+    "constraints": [
+      "工具不要承担多个职责。",
+      "敏感操作必须显式确认。",
+      "错误输出必须可被 Agent 理解。",
+      "不要编造不存在的信息。",
+      "信息不足时先列出缺失项。",
+      "不要大范围重构，优先给最小可行方案。",
+      "涉及来源时必须保留 source_url。"
+    ],
+    "verification": [
+      "正向样例能成功调用。",
+      "负向样例返回结构化错误。",
+      "Agent 能根据错误继续下一步。"
+    ],
+    "example_prompt": "",
+    "copy_content": "你是一个【Agent】方向的 AI 工作流执行助手。\n\n任务：\n【为 Agent / MCP 工具设计稳定的输入输出契约、错误处理和验证样例。】\n\n适用场景：\n【需要把本地能力、第三方 API 或业务操作暴露给 ChatGPT、Claude Code、Codex 或多 Agent 系统调用时使用。】\n\n我的输入：\n【请在这里粘贴你的具体问题、报错、代码、截图描述、链接或目标】\n\n请按以下流程执行：\n1. 定义工具唯一职责和不可做事项。\n2. 设计 JSON schema 或参数表。\n3. 列出成功输出和错误输出。\n4. 补充 3 个正向样例和 3 个负向样例。\n5. 写最小调用测试。\n6. 把契约写入工具说明或 MCP metadata。\n\n输出时请包含：\n- 工具说明\n- 输入 schema\n- 输出 schema\n- 错误码\n- 测试样例\n\n约束：\n- 工具不要承担多个职责。\n- 敏感操作必须显式确认。\n- 错误输出必须可被 Agent 理解。\n- 不要编造不存在的信息。\n- 信息不足时先列出缺失项。\n- 不要大范围重构，优先给最小可行方案。\n- 涉及来源时必须保留 source_url。\n\n验证：\n- 正向样例能成功调用。\n- 负向样例返回结构化错误。\n- Agent 能根据错误继续下一步。",
+    "tags": [
+      "MCP",
+      "Agent",
+      "Tool Calling"
+    ],
+    "difficulty": "advanced",
+    "tooling": [
+      "ChatGPT",
+      "Claude Code",
+      "MCP"
+    ],
+    "source_name": "站内手动整理",
+    "source_url": "manual:mcp-tool-contract-workflow",
+    "source_type": "manual",
+    "quality_score": 5,
+    "quality_reason": "结构完整，包含场景、输入、步骤、输出、约束、验证和来源，可直接入库。",
+    "approved": true,
+    "recommended": true,
+    "created_at": "2026-05-27",
+    "updated_at": "2026-05-27"
+  },
+  {
+    "id": "skill_cee66304",
+    "title": "PRD 到页面 UX 重构工作流",
+    "slug": "prd-to-ux-redesign-workflow",
+    "category": "Skill",
+    "domain": "产品设计",
+    "summary": "把 PRD、用户目标和现有页面转成可执行的 UX 重构方案。",
+    "use_case": "页面信息混乱、转化路径不清、用户引导不足，或需要把新产品需求落到界面结构时使用。",
+    "trigger_keywords": [
+      "PRD",
+      "UX",
+      "页面重构",
+      "产品设计",
+      "用户引导"
+    ],
+    "inputs": [
+      "PRD",
+      "现有页面截图",
+      "用户目标",
+      "关键指标",
+      "限制条件"
+    ],
+    "steps": [
+      "提取用户任务和业务目标。",
+      "识别当前页面阻塞点。",
+      "重排信息架构和关键路径。",
+      "设计空状态、加载、错误和成功状态。",
+      "输出组件级改动清单和验收标准。"
+    ],
+    "output_format": [
+      "页面目标",
+      "结构改版方案",
+      "组件清单",
+      "状态设计",
+      "验收标准"
+    ],
+    "constraints": [
+      "不要做纯装饰性改版。",
+      "不要让核心任务藏在说明文字里。",
+      "移动端和桌面端都要考虑。",
+      "不要编造不存在的信息。",
+      "信息不足时先列出缺失项。",
+      "不要大范围重构，优先给最小可行方案。",
+      "涉及来源时必须保留 source_url。"
+    ],
+    "verification": [
+      "用户能在首屏理解下一步。",
+      "核心路径点击数减少或更清晰。",
+      "异常状态有明确反馈。"
+    ],
+    "example_prompt": "",
+    "copy_content": "你是一个【产品设计】方向的 AI 工作流执行助手。\n\n任务：\n【把 PRD、用户目标和现有页面转成可执行的 UX 重构方案。】\n\n适用场景：\n【页面信息混乱、转化路径不清、用户引导不足，或需要把新产品需求落到界面结构时使用。】\n\n我的输入：\n【请在这里粘贴你的具体问题、报错、代码、截图描述、链接或目标】\n\n请按以下流程执行：\n1. 提取用户任务和业务目标。\n2. 识别当前页面阻塞点。\n3. 重排信息架构和关键路径。\n4. 设计空状态、加载、错误和成功状态。\n5. 输出组件级改动清单和验收标准。\n\n输出时请包含：\n- 页面目标\n- 结构改版方案\n- 组件清单\n- 状态设计\n- 验收标准\n\n约束：\n- 不要做纯装饰性改版。\n- 不要让核心任务藏在说明文字里。\n- 移动端和桌面端都要考虑。\n- 不要编造不存在的信息。\n- 信息不足时先列出缺失项。\n- 不要大范围重构，优先给最小可行方案。\n- 涉及来源时必须保留 source_url。\n\n验证：\n- 用户能在首屏理解下一步。\n- 核心路径点击数减少或更清晰。\n- 异常状态有明确反馈。",
+    "tags": [
+      "PRD",
+      "UX",
+      "产品设计"
+    ],
+    "difficulty": "intermediate",
+    "tooling": [
+      "ChatGPT",
+      "Claude Code",
+      "Codex"
+    ],
+    "source_name": "站内手动整理",
+    "source_url": "manual:prd-to-ux-redesign-workflow",
+    "source_type": "manual",
+    "quality_score": 5,
+    "quality_reason": "结构完整，包含场景、输入、步骤、输出、约束、验证和来源，可直接入库。",
+    "approved": true,
+    "recommended": true,
+    "created_at": "2026-05-27",
+    "updated_at": "2026-05-27"
+  },
+  {
+    "id": "skill_02c79fa1",
+    "title": "RAG 检索优化评估集工作流",
+    "slug": "rag-retrieval-eval-dataset-workflow",
+    "category": "Skill",
+    "domain": "RAG",
+    "summary": "用固定评估集、单变量实验和失败样例分析优化 RAG 召回质量。",
+    "use_case": "RAG 答案引用不准、召回低相关、向量库切分或 rerank 策略需要调整时使用。",
+    "trigger_keywords": [
+      "RAG",
+      "检索优化",
+      "向量库",
+      "评估集",
+      "Prompt 评测"
+    ],
+    "inputs": [
+      "10-30 个真实查询",
+      "期望命中文档",
+      "当前 top-k 结果",
+      "chunk 规则",
+      "embedding / rerank 配置"
+    ],
+    "steps": [
+      "整理查询与期望命中文档。",
+      "记录当前 top-k、分数、chunk 和引用。",
+      "固定评估集和基线指标。",
+      "每次只调整一个变量。",
+      "比较命中率、引用准确率和失败样例。",
+      "把最佳策略写成回归评估脚本。"
+    ],
+    "output_format": [
+      "基线指标",
+      "实验变量",
+      "结果对比",
+      "失败样例",
+      "推荐配置"
+    ],
+    "constraints": [
+      "不要凭单个样例判断策略优劣。",
+      "不要同时修改多个变量。",
+      "保留失败样例。",
+      "不要编造不存在的信息。",
+      "信息不足时先列出缺失项。",
+      "不要大范围重构，优先给最小可行方案。",
+      "涉及来源时必须保留 source_url。"
+    ],
+    "verification": [
+      "固定评估集上指标提升。",
+      "失败样例数量减少。",
+      "新增策略可重复运行。"
+    ],
+    "example_prompt": "",
+    "copy_content": "你是一个【RAG】方向的 AI 工作流执行助手。\n\n任务：\n【用固定评估集、单变量实验和失败样例分析优化 RAG 召回质量。】\n\n适用场景：\n【RAG 答案引用不准、召回低相关、向量库切分或 rerank 策略需要调整时使用。】\n\n我的输入：\n【请在这里粘贴你的具体问题、报错、代码、截图描述、链接或目标】\n\n请按以下流程执行：\n1. 整理查询与期望命中文档。\n2. 记录当前 top-k、分数、chunk 和引用。\n3. 固定评估集和基线指标。\n4. 每次只调整一个变量。\n5. 比较命中率、引用准确率和失败样例。\n6. 把最佳策略写成回归评估脚本。\n\n输出时请包含：\n- 基线指标\n- 实验变量\n- 结果对比\n- 失败样例\n- 推荐配置\n\n约束：\n- 不要凭单个样例判断策略优劣。\n- 不要同时修改多个变量。\n- 保留失败样例。\n- 不要编造不存在的信息。\n- 信息不足时先列出缺失项。\n- 不要大范围重构，优先给最小可行方案。\n- 涉及来源时必须保留 source_url。\n\n验证：\n- 固定评估集上指标提升。\n- 失败样例数量减少。\n- 新增策略可重复运行。",
+    "tags": [
+      "RAG",
+      "向量库",
+      "评估集",
+      "数据与检索"
+    ],
+    "difficulty": "advanced",
+    "tooling": [
+      "ChatGPT",
+      "Claude Code",
+      "Codex"
+    ],
+    "source_name": "站内手动整理",
+    "source_url": "manual:rag-retrieval-eval-dataset-workflow",
+    "source_type": "manual",
+    "quality_score": 5,
+    "quality_reason": "结构完整，包含场景、输入、步骤、输出、约束、验证和来源，可直接入库。",
+    "approved": true,
+    "recommended": true,
+    "created_at": "2026-05-27",
+    "updated_at": "2026-05-27"
+  },
+  {
+    "id": "skill_a9afc1ac",
+    "title": "公众号文章选题到成稿工作流",
+    "slug": "wechat-article-topic-to-draft-workflow",
+    "category": "Skill",
+    "domain": "内容创作",
+    "summary": "把选题、受众、素材和观点整理成公众号文章大纲、正文和标题备选。",
+    "use_case": "需要稳定产出技术文章、产品复盘、运营内容或知识型公众号长文时使用。",
+    "trigger_keywords": [
+      "公众号",
+      "文章写作",
+      "选题",
+      "内容创作"
+    ],
+    "inputs": [
+      "目标读者",
+      "选题方向",
+      "素材链接",
+      "核心观点",
+      "语气要求"
+    ],
+    "steps": [
+      "明确读者画像和文章目标。",
+      "筛选 3 个角度并判断差异。",
+      "生成文章大纲和论证路径。",
+      "补充案例、反例和行动建议。",
+      "输出正文初稿和标题备选。",
+      "检查事实、引用和表达风险。"
+    ],
+    "output_format": [
+      "标题备选",
+      "文章大纲",
+      "正文初稿",
+      "金句",
+      "发布检查清单"
+    ],
+    "constraints": [
+      "不要编造数据和案例。",
+      "不要堆砌空话。",
+      "保留不确定信息的标注。",
+      "不要编造不存在的信息。",
+      "信息不足时先列出缺失项。",
+      "不要大范围重构，优先给最小可行方案。",
+      "涉及来源时必须保留 source_url。"
+    ],
+    "verification": [
+      "开头能说明读者痛点。",
+      "每节都有明确观点。",
+      "结尾有行动建议。"
+    ],
+    "example_prompt": "",
+    "copy_content": "你是一个【内容创作】方向的 AI 工作流执行助手。\n\n任务：\n【把选题、受众、素材和观点整理成公众号文章大纲、正文和标题备选。】\n\n适用场景：\n【需要稳定产出技术文章、产品复盘、运营内容或知识型公众号长文时使用。】\n\n我的输入：\n【请在这里粘贴你的具体问题、报错、代码、截图描述、链接或目标】\n\n请按以下流程执行：\n1. 明确读者画像和文章目标。\n2. 筛选 3 个角度并判断差异。\n3. 生成文章大纲和论证路径。\n4. 补充案例、反例和行动建议。\n5. 输出正文初稿和标题备选。\n6. 检查事实、引用和表达风险。\n\n输出时请包含：\n- 标题备选\n- 文章大纲\n- 正文初稿\n- 金句\n- 发布检查清单\n\n约束：\n- 不要编造数据和案例。\n- 不要堆砌空话。\n- 保留不确定信息的标注。\n- 不要编造不存在的信息。\n- 信息不足时先列出缺失项。\n- 不要大范围重构，优先给最小可行方案。\n- 涉及来源时必须保留 source_url。\n\n验证：\n- 开头能说明读者痛点。\n- 每节都有明确观点。\n- 结尾有行动建议。",
+    "tags": [
+      "公众号",
+      "写作",
+      "内容创作"
+    ],
+    "difficulty": "beginner",
+    "tooling": [
+      "ChatGPT",
+      "Claude"
+    ],
+    "source_name": "站内手动整理",
+    "source_url": "manual:wechat-article-topic-to-draft-workflow",
+    "source_type": "manual",
+    "quality_score": 5,
+    "quality_reason": "结构完整，包含场景、输入、步骤、输出、约束、验证和来源，可直接入库。",
+    "approved": true,
+    "recommended": true,
+    "created_at": "2026-05-27",
+    "updated_at": "2026-05-27"
+  },
+  {
+    "id": "skill_0cd679c9",
+    "title": "微信小程序云函数超时排查工作流",
+    "slug": "wechat-cloud-function-timeout-debug-workflow",
+    "category": "Debug",
+    "domain": "微信小程序",
+    "summary": "排查微信小程序云函数超时、冷启动、外部 API 慢调用和日志缺失问题。",
+    "use_case": "云开发函数调用超时、前端一直 loading、AI 接口返回慢或云函数日志看不出瓶颈时使用。",
+    "trigger_keywords": [
+      "微信小程序",
+      "云开发",
+      "云函数超时",
+      "AI 调用",
+      "Debug"
+    ],
+    "inputs": [
+      "云函数代码",
+      "调用参数",
+      "超时日志",
+      "外部 API 地址",
+      "云开发配置"
+    ],
+    "steps": [
+      "确认前端调用、云函数入口和 timeout 配置。",
+      "在入口、外部请求前后、返回前打印耗时日志。",
+      "检查冷启动、依赖体积和初始化逻辑。",
+      "给外部 AI/API 调用加超时和降级。",
+      "拆分长任务或改为异步轮询。",
+      "用最小参数重复调用验证耗时。"
+    ],
+    "output_format": [
+      "瓶颈位置",
+      "日志证据",
+      "修复方案",
+      "验证步骤"
+    ],
+    "constraints": [
+      "不要在日志中输出用户隐私。",
+      "不要无限等待外部 API。",
+      "保留失败兜底提示。",
+      "不要编造不存在的信息。",
+      "信息不足时先列出缺失项。",
+      "不要大范围重构，优先给最小可行方案。",
+      "涉及来源时必须保留 source_url。"
+    ],
+    "verification": [
+      "云函数耗时低于平台限制。",
+      "前端能收到明确成功或失败状态。",
+      "日志能定位每一段耗时。"
+    ],
+    "example_prompt": "",
+    "copy_content": "你是一个【微信小程序】方向的 AI 工作流执行助手。\n\n任务：\n【排查微信小程序云函数超时、冷启动、外部 API 慢调用和日志缺失问题。】\n\n适用场景：\n【云开发函数调用超时、前端一直 loading、AI 接口返回慢或云函数日志看不出瓶颈时使用。】\n\n我的输入：\n【请在这里粘贴你的具体问题、报错、代码、截图描述、链接或目标】\n\n请按以下流程执行：\n1. 确认前端调用、云函数入口和 timeout 配置。\n2. 在入口、外部请求前后、返回前打印耗时日志。\n3. 检查冷启动、依赖体积和初始化逻辑。\n4. 给外部 AI/API 调用加超时和降级。\n5. 拆分长任务或改为异步轮询。\n6. 用最小参数重复调用验证耗时。\n\n输出时请包含：\n- 瓶颈位置\n- 日志证据\n- 修复方案\n- 验证步骤\n\n约束：\n- 不要在日志中输出用户隐私。\n- 不要无限等待外部 API。\n- 保留失败兜底提示。\n- 不要编造不存在的信息。\n- 信息不足时先列出缺失项。\n- 不要大范围重构，优先给最小可行方案。\n- 涉及来源时必须保留 source_url。\n\n验证：\n- 云函数耗时低于平台限制。\n- 前端能收到明确成功或失败状态。\n- 日志能定位每一段耗时。",
+    "tags": [
+      "微信小程序",
+      "云开发",
+      "云函数",
+      "Debug"
+    ],
+    "difficulty": "intermediate",
+    "tooling": [
+      "Claude Code",
+      "Codex",
+      "微信开发者工具"
+    ],
+    "source_name": "站内手动整理",
+    "source_url": "manual:wechat-cloud-function-timeout-debug-workflow",
+    "source_type": "manual",
+    "quality_score": 5,
+    "quality_reason": "结构完整，包含场景、输入、步骤、输出、约束、验证和来源，可直接入库。",
+    "approved": true,
+    "recommended": true,
+    "created_at": "2026-05-27",
+    "updated_at": "2026-05-27"
+  },
+  {
+    "id": "skill_0d2ba029",
+    "title": "微信支付回调失败排查工作流",
+    "slug": "wechat-pay-callback-debug-workflow",
+    "category": "Debug",
+    "domain": "微信小程序",
+    "summary": "排查微信支付 JSAPI 下单、签名、回调验签、订单状态同步和权益发放失败。",
+    "use_case": "用户付款成功但小程序没有解锁权益、支付回调没有触发、签名失败或订单状态不一致时使用。",
+    "trigger_keywords": [
+      "微信支付",
+      "JSAPI",
+      "支付回调",
+      "验签",
+      "权益解锁"
+    ],
+    "inputs": [
+      "订单号",
+      "下单参数",
+      "支付回调日志",
+      "商户配置",
+      "权益表状态"
+    ],
+    "steps": [
+      "核对 appid、mchid、回调 URL 和证书配置。",
+      "检查前端 requestPayment 参数和签名时间戳。",
+      "查看支付通知是否到达云函数或后端接口。",
+      "验证回调签名和解密逻辑。",
+      "以订单号做幂等更新权益状态。",
+      "增加主动查单补偿任务。"
+    ],
+    "output_format": [
+      "失败环节",
+      "证据",
+      "修复补丁",
+      "查单/验签命令",
+      "补偿方案"
+    ],
+    "constraints": [
+      "不要相信前端支付成功作为最终权益依据。",
+      "回调处理必须幂等。",
+      "不要记录完整敏感证书或密钥。",
+      "不要编造不存在的信息。",
+      "信息不足时先列出缺失项。",
+      "不要大范围重构，优先给最小可行方案。",
+      "涉及来源时必须保留 source_url。"
+    ],
+    "verification": [
+      "回调验签通过。",
+      "重复通知不会重复发放权益。",
+      "支付成功后订单和权益状态一致。"
+    ],
+    "example_prompt": "",
+    "copy_content": "你是一个【微信小程序】方向的 AI 工作流执行助手。\n\n任务：\n【排查微信支付 JSAPI 下单、签名、回调验签、订单状态同步和权益发放失败。】\n\n适用场景：\n【用户付款成功但小程序没有解锁权益、支付回调没有触发、签名失败或订单状态不一致时使用。】\n\n我的输入：\n【请在这里粘贴你的具体问题、报错、代码、截图描述、链接或目标】\n\n请按以下流程执行：\n1. 核对 appid、mchid、回调 URL 和证书配置。\n2. 检查前端 requestPayment 参数和签名时间戳。\n3. 查看支付通知是否到达云函数或后端接口。\n4. 验证回调签名和解密逻辑。\n5. 以订单号做幂等更新权益状态。\n6. 增加主动查单补偿任务。\n\n输出时请包含：\n- 失败环节\n- 证据\n- 修复补丁\n- 查单/验签命令\n- 补偿方案\n\n约束：\n- 不要相信前端支付成功作为最终权益依据。\n- 回调处理必须幂等。\n- 不要记录完整敏感证书或密钥。\n- 不要编造不存在的信息。\n- 信息不足时先列出缺失项。\n- 不要大范围重构，优先给最小可行方案。\n- 涉及来源时必须保留 source_url。\n\n验证：\n- 回调验签通过。\n- 重复通知不会重复发放权益。\n- 支付成功后订单和权益状态一致。",
+    "tags": [
+      "微信小程序",
+      "微信支付",
+      "回调",
+      "Debug"
+    ],
+    "difficulty": "advanced",
+    "tooling": [
+      "Claude Code",
+      "Codex",
+      "微信支付"
+    ],
+    "source_name": "站内手动整理",
+    "source_url": "manual:wechat-pay-callback-debug-workflow",
+    "source_type": "manual",
+    "quality_score": 5,
+    "quality_reason": "结构完整，包含场景、输入、步骤、输出、约束、验证和来源，可直接入库。",
+    "approved": true,
+    "recommended": true,
+    "created_at": "2026-05-27",
+    "updated_at": "2026-05-27"
+  }
+]

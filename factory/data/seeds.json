@@ -1,0 +1,8 @@
+[
+  {
+    "title": "FastAPI 422 when calling LLM API",
+    "error": "422 Unprocessable Entity",
+    "tool": ["FastAPI", "OpenAI API"],
+    "source": "manual_seed"
+  }
+]

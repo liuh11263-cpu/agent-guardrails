@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --app-bg: #f7f5ef;
+  --app-bg-soft: #efede6;
+  --surface: #fffdf8;
+  --surface-raised: #ffffff;
+  --text-main: #1f1d1a;
+  --text-muted: #6f6a60;
+  --text-subtle: #969086;
+  --border-soft: #ded8cc;
+  --border-strong: #cfc7b8;
+  --nav-bg: #fffaf2;
+  --nav-text: #25221e;
+  --nav-muted: #786f64;
+  --nav-border: #ded8cc;
+  --accent: #2563eb;
+  --accent-soft: #eaf1ff;
+  --code-bg: #111827;
+  --code-text: #b6f36a;
+}
+
+.dark {
+  color-scheme: dark;
+  --app-bg: #1f1f1b;
+  --app-bg-soft: #191916;
+  --surface: #262622;
+  --surface-raised: #2d2d28;
+  --text-main: #f4f1ea;
+  --text-muted: #bbb5aa;
+  --text-subtle: #8f897f;
+  --border-soft: #3b3932;
+  --border-strong: #504d44;
+  --nav-bg: #1b1b18;
+  --nav-text: #f4f1ea;
+  --nav-muted: #aaa399;
+  --nav-border: #34322c;
+  --accent: #60a5fa;
+  --accent-soft: #172235;
+  --code-bg: #080b14;
+  --code-text: #b6f36a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--app-bg);
+  color: var(--text-main);
+}
+
+::selection {
+  background: rgba(59, 130, 246, 0.4);
+  color: #fff;
+}
+
+a {
+  text-decoration: none;
+}

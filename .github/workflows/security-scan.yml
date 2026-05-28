@@ -1,0 +1,45 @@
+name: Security and Ingestion Scan
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'content/**'
+      - 'data/**'
+      - 'app/**'
+      - 'scripts/**'
+
+jobs:
+  security-check:
+    name: Check for Secrets and Formats
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 1. 密钥泄露扫描 (使用业界最权威的 Gitleaks)
+      - name: Scan for Secret Leaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: false # 发现泄露直接报错中断 PR
+
+      # 2. 环境搭建
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # 3. 运行单元测试，确保 classifySkill 和 normalizeSkill 分类判定没有被改崩溃
+      - name: Run Test Suites
+        run: npm run test
+
+      # 4. 运行静态构建，确认 PR 提交的 Markdown YAML 格式没有写错，且 Next.js 页面渲染通过
+      - name: Verify Production Build
+        run: npm run build
