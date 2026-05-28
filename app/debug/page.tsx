@@ -18,7 +18,7 @@ export default function DebugPage() {
     <main className="min-h-[calc(100vh-68px)] bg-[var(--app-bg)] px-5 py-8 text-[var(--text-main)] lg:px-6">
       <div className="sticky top-[68px] z-30 mb-6 border-b border-[var(--border-soft)] bg-[var(--app-bg)] pb-6 pt-2">
         <p className="text-sm font-semibold text-[var(--accent)]">
-          Debug Case Library
+          Debug 调试案例库
         </p>
         <h1 className="mt-2 text-3xl font-semibold text-[var(--text-main)]">
           搜索和筛选 AI 工程问题

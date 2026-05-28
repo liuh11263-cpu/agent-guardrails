@@ -17,7 +17,7 @@ export default function DocsPage() {
         <div className="border-b border-[var(--border-soft)] pb-6">
           <div className="flex items-center gap-2 text-sm font-semibold text-[var(--accent)]">
             <BookOpen size={16} />
-            <span>PROJECT DOCUMENTATION</span>
+            <span>项目使用文档</span>
           </div>
           <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-[var(--text-main)] sm:text-5xl">
             使用与对接指南
