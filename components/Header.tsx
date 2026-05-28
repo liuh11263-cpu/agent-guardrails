@@ -1,12 +1,11 @@
 "use client";
 
-import { Github, Star, TerminalSquare } from "lucide-react";
+import { Github, TerminalSquare } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { getBookmarkHelpText } from "@/lib/bookmark";
 
 const navItems = [
   { href: "/", label: "首页 / Home" },
@@ -19,7 +18,6 @@ const navItems = [
 
 export function Header() {
   const pathname = usePathname();
-  const [bookmarkMessage, setBookmarkMessage] = useState("");
 
   useEffect(() => {
     (window as any).gtranslateSettings = {
@@ -33,7 +31,7 @@ export function Header() {
     };
 
     const script = document.createElement("script");
-    script.src = "https://cdn.gtranslate.net/widgets/latest/float.js";
+    script.src = "https://cdn.gtranslate.net/widgets/latest/dropdown.js";
     script.defer = true;
     document.body.appendChild(script);
 
@@ -50,11 +48,7 @@ export function Header() {
     return pathname.startsWith(href);
   }
 
-  function handleBookmark() {
-    const message = getBookmarkHelpText(window.navigator.platform);
-    setBookmarkMessage(message);
-    window.setTimeout(() => setBookmarkMessage(""), 2600);
-  }
+
 
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--nav-border)] bg-[var(--nav-bg)] text-[var(--nav-text)] shadow-sm">
@@ -90,27 +84,6 @@ export function Header() {
         <div className="hidden min-w-[260px] flex-1 items-center justify-end gap-3 lg:flex">
           <ThemeToggle />
           <div id="gtranslate_wrapper" className="flex items-center min-h-[38px]"></div>
-          <div className="relative">
-            <button
-              type="button"
-              onClick={handleBookmark}
-              className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-md px-2 py-2 text-sm font-semibold text-[var(--nav-text)] hover:bg-[var(--app-bg-soft)]"
-              aria-label="收藏本站"
-            >
-              <Star size={16} />
-              收藏
-            </button>
-            <span
-              aria-live="polite"
-              className={`absolute right-0 top-[calc(100%+8px)] w-max max-w-[260px] rounded-lg border border-[var(--border-soft)] bg-[var(--surface-raised)] px-3 py-2 text-xs font-medium text-[var(--text-muted)] shadow-lg transition ${
-                bookmarkMessage
-                  ? "translate-y-0 opacity-100"
-                  : "pointer-events-none -translate-y-1 opacity-0"
-              }`}
-            >
-              {bookmarkMessage}
-            </span>
-          </div>
           <a
             href="https://github.com/liuh11263-cpu/agent-guardrails"
             className="inline-flex items-center gap-1.5 rounded-md px-2 py-2 text-sm font-semibold text-[var(--nav-text)] hover:bg-[var(--app-bg-soft)]"
